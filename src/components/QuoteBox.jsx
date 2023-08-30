@@ -1,8 +1,27 @@
+import { useRef, useEffect } from "react";
 import twitterSVG from "./../../public/twitter.svg";
+import VanillaTilt from "vanilla-tilt";
 
 const QuoteBox = () => {
+  const tiltRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize vanilla-tilt on the element
+    VanillaTilt.init(tiltRef.current, {
+      max: 1,
+      speed: 100,
+      glare: true,
+      "max-glare": 0.5,
+    });
+
+    // Clean up the tilt effect on unmount
+    return () => {
+      tiltRef.current.vanillaTilt.destroy();
+    };
+  }, []);
+
   return (
-    <div id="quote-box">
+    <div id="quote-box" ref={tiltRef}>
       <div id="text">
         {
           '"La vida es lo que pasa mientras estás ocupado haciendo otros planes."'
