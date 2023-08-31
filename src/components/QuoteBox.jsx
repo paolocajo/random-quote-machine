@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import twitterSVG from "./../../public/twitter.svg";
+import twitterSVG from "/twitter.svg";
 import VanillaTilt from "vanilla-tilt";
 
 const QuoteBox = () => {
