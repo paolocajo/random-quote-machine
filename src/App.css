@@ -89,9 +89,9 @@ footer a:hover {
   opacity: 0.8;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
   #quote-box {
-    max-width: 80%;
+    max-width: 60%;
     margin: 20px auto;
   }
 }
