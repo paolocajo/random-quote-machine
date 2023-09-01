@@ -1,14 +1,12 @@
 import { useRef, useEffect, useState } from "react";
-import twitterSVG from "/twitter.svg";
 import VanillaTilt from "vanilla-tilt";
-// import { useFetch } from "../hooks/useFetch";
 import Loader from "./Loader";
 import { fetchData } from "../helpers/fetchData";
 import Message from "./Message";
+import QuoteContent from "./QuoteContent";
 
 const QuoteBox = () => {
   const tiltRef = useRef(null);
-  const doubleQuote = '"';
   const [previousId, setPreviousId] = useState(null);
   const dataFetchedRef = useRef(false);
   const [data, setData] = useState(null);
@@ -66,44 +64,13 @@ const QuoteBox = () => {
   };
   return (
     <div id="quote-box" ref={tiltRef}>
-      {data ? (
-        <>
-          <div id="text">
-            {doubleQuote}
-            {data[0].content}
-            {doubleQuote}
-          </div>
-          <div id="author">- {data[0].author}</div>
-          <div className="buttons">
-            <a
-              className="button button-icon"
-              id="tweet-quote"
-              href={`https://twitter.com/intent/tweet?text="${encodeURIComponent(
-                data[0].content + '"' + " - " + data[0].author
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={twitterSVG} alt="Twitter" />
-            </a>
-            <button
-              className="button"
-              id="new-quote"
-              onClick={() => handleClick()}
-            >
-              New quote
-            </button>
-          </div>
-        </>
-      ) : loading ? (
-        <Loader />
-      ) : (
-        error && (
-          <Message
-            msg={`Error ${error.status}: ${error.statusText}`}
-            bgColor="#0c4661"
-          />
-        )
+      {data && <QuoteContent data={data} handleClick={handleClick} />}
+      {loading && <Loader />}
+      {error && (
+        <Message
+          msg={`Error ${error.status}: ${error.statusText}`}
+          bgColor="#0c4661"
+        />
       )}
     </div>
   );
